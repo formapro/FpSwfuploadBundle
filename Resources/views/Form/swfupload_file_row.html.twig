@@ -1,0 +1,85 @@
+{%block swfupload_file_row%}
+
+/**
+* Wrap it to require define in your client code.
+*
+* require(["jquery/jquery"], function() {
+* require(["media/swfupload/swfupload"], function() {
+* define("media/swfupload/jquery.swfupload"], function() {
+*/
+
+{%if swfupload_debug%}
+var swfupload_debug = new Array;
+{%endif%}
+
+$("{{ form.getVar('swfupload_placeholder_container')|raw }}").swfupload({
+	upload_url:  "{{ form.getVar('swfupload_upload_url')|raw }}",
+	post_params: {{ form.getVar('swfupload_post_parameters')|json_encode|raw }},
+	file_types : "{{ form.getVar('swfupload_file_types')|raw }}",
+	file_post_name: "{{ form.getVar('swfupload_file_post_name')|raw }}",
+	file_types_description : "{{ form.getVar('swfupload_file_types_description')|raw }}",
+	file_size_limit : "{{ form.getVar('swfupload_file_size_limit')|raw }}",
+	flash_url : "{{ asset(form.getVar('swfupload_flash_url'))|raw }}",
+	button_placeholder : $('{{ form.getVar('swfupload_placeholder_container')|raw }} {{ form.getVar('swfupload_button_placeholder_selector')|raw }}')[0],
+	button_image_url: "{{asset(form.getVar('swfupload_button_image_url'))|raw }}",
+
+{%if form.getVar('swfupload_button_width')%}
+	button_width: "{{ form.getVar('swfupload_button_width') }}",
+{%else%}
+	button_width: $('{{ form.getVar('swfupload_placeholder_container')|raw }} {{ form.getVar('swfupload_button_placeholder_selector')|raw }}').outerWidth(),
+{%endif%}
+
+{%if form.getVar('swfupload_button_width')%}
+	button_height: "{{ form.getVar('swfupload_button_height') }}",
+{%else%}
+	button_height: $('{{ form.getVar('swfupload_placeholder_container')|raw }} {{ form.getVar('swfupload_button_placeholder_selector')|raw }}').outerHeight(),
+{%endif%}
+
+	button_text: "{{ form.getVar('swfupload_button_text') }}",
+	button_text_style: "{{ form.getVar('swfupload_button_text_style') }}",
+	flash_color: "{{ form.getVar('swfupload_flash_color')|raw }}",
+	button_window_mode: {{ form.getVar('swfupload_button_window_mode')|raw }},
+	button_action : {{ form.getVar('swfupload_button_action')|raw }},
+	button_cursor : {{ form.getVar('swfupload_button_cursor')|raw }},
+
+{%if swfupload_debug%}
+	debug: true,
+	prevent_swf_caching: true,
+	debug_handler : function(debug) {
+		if(window.console) { console.debug(debug) };
+	},
+{%else%}
+	debug: false,
+	prevent_swf_caching: {{ form.getVar('swfupload_prevent_swf_caching') ? "true" : "false" }},
+{%endif%}
+
+	upload_start_handler: function(e){
+		$("{{ form.getVar('swfupload_placeholder_container')|raw }}").trigger('uploadStart');
+	},
+	upload_progress_handler: function(f, c, t){
+		$("{{ form.getVar('swfupload_placeholder_container')|raw }}").trigger('uploadProgress', [f, c, t]);
+	}
+})
+.bind('fileQueued', function(event, file){
+	// start the upload since it's queued
+	$(this).swfupload('startUpload');
+})
+.bind('uploadSuccess', function(event, file, serverData) {
+	//var obj = $.parseJSON(serverData);
+	//if (obj.errors) {
+	//  alert(obj.errors);
+	//}
+	console.log('>>>>>>>>>>>', file, serverData);
+})
+.bind('fileQueueError', function(event, file, errorCode, message){
+	alert('La taille du fichier dépasse la limite');
+})
+.bind('uploadError', function(e, f, c, m) {
+	//var obj = $.parseJSON(serverData);
+	//if (obj.errors) {
+	//  alert(obj.errors);
+	//}
+	console.log('>>>>>>>>>', f, c, m);
+});
+
+{%endblock%}

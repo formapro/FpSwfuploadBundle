@@ -1,0 +1,7 @@
+parameters:
+#    fp_swfupload.example.class: Fp\SwfuploadBundle\Example
+
+services:
+#    fp_swfupload.example:
+#        class: %fp_swfupload.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
