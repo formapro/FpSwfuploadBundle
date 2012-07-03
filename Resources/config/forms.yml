@@ -1,7 +1,0 @@
-services:
-    form.type.swfupload_file:
-        class:                          Fp\SwfuploadBundle\Form\Type\SwfuploadFileType
-        arguments:
-            -                           %kernel.debug%
-        tags:
-            -                           { name: form.type, alias: swfupload_file }

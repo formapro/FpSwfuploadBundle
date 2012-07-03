@@ -1,3 +1,0 @@
-FpSwfuploadBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: FpSwfuploadBundle:Default:index }
