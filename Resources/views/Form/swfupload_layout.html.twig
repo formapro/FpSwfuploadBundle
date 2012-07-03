@@ -1,4 +1,8 @@
-{%block swfupload_file_widget%}
+{% block swfupload_file_widget %}
+	{{ block('swfupload_file_javascript') }}
+{% endblock %}
+
+{% block swfupload_file_javascript %}
 
 {%if swfupload_debug%}
 var swfupload_debug = new Array;
