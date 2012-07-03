@@ -1,7 +1,7 @@
-parameters:
-#    fp_swfupload.example.class: Fp\SwfuploadBundle\Example
-
 services:
-#    fp_swfupload.example:
-#        class: %fp_swfupload.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    form.type.swfupload_file:
+        class:                          Fp\SwfuploadBundle\Form\Type\SwfuploadFileType
+        arguments:
+            -                           %kernel.debug%
+        tags:
+            -                           { name: form.type, alias: swfupload_file }

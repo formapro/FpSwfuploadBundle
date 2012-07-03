@@ -21,22 +21,11 @@ class SwfuploadFileType extends AbstractType
         $this->debug = $debug;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        /*
-        foreach ($options as $name => $value) {
-            if (0 === strpos($name, 'swfupload')) {
-                $builder->setAttribute($name, $value);
-            }
-        }
-        */
-    }
-
     public function buildView(FormViewInterface $view, FormInterface $form, array $options)
     {
         $config = $form->getConfig();
 
-        $options = $form->getConfig()->getOptions();
+        $options = $config->getOptions();
         foreach($options as $name => $value) {
             if(0 === strpos($name, 'swfupload')) {
                 $view->setVar($name, $value);
@@ -52,28 +41,12 @@ class SwfuploadFileType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults($this->getDefaultTypeOptions());
-        $resolver->setRequired($this->getRequiredTypeOptionsNames());
-    }
-
-    /**
-     * @return array
-     */
-    private function getRequiredTypeOptionsNames()
-    {
-        return array(
+        $resolver->setRequired(array(
             'swfupload_upload_url',
             'swfupload_placeholder_container',
-        );
-    }
+        ));
 
-    /**
-     *
-     * @return array
-     */
-    private function getDefaultTypeOptions()
-    {
-        return array(
+        $resolver->setDefaults(array(
             'swfupload_file_post_name' => '',
             'swfupload_prevent_swf_caching' => false,
             'swfupload_debug' => $this->debug,
@@ -92,7 +65,8 @@ class SwfuploadFileType extends AbstractType
             'swfupload_button_window_mode' => 'SWFUpload.WINDOW_MODE.TRANSPARENT',
             'swfupload_button_action' => 'SWFUpload.BUTTON_ACTION.SELECT_FILE',
             'swfupload_button_cursor' => 'SWFUpload.CURSOR.HAND',
-        );
+        ));
+
     }
 
     public function getParent()

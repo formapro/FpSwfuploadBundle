@@ -1,12 +1,4 @@
-{%block swfupload_file_row%}
-
-/**
-* Wrap it to require define in your client code.
-*
-* require(["jquery/jquery"], function() {
-* require(["media/swfupload/swfupload"], function() {
-* define("media/swfupload/jquery.swfupload"], function() {
-*/
+{%block swfupload_file_widget%}
 
 {%if swfupload_debug%}
 var swfupload_debug = new Array;
@@ -53,33 +45,11 @@ $("{{ form.getVar('swfupload_placeholder_container')|raw }}").swfupload({
 	prevent_swf_caching: {{ form.getVar('swfupload_prevent_swf_caching') ? "true" : "false" }},
 {%endif%}
 
-	upload_start_handler: function(e){
-		$("{{ form.getVar('swfupload_placeholder_container')|raw }}").trigger('uploadStart');
-	},
-	upload_progress_handler: function(f, c, t){
-		$("{{ form.getVar('swfupload_placeholder_container')|raw }}").trigger('uploadProgress', [f, c, t]);
-	}
-})
-.bind('fileQueued', function(event, file){
-	// start the upload since it's queued
-	$(this).swfupload('startUpload');
-})
-.bind('uploadSuccess', function(event, file, serverData) {
-	//var obj = $.parseJSON(serverData);
-	//if (obj.errors) {
-	//  alert(obj.errors);
-	//}
-	console.log('>>>>>>>>>>>', file, serverData);
-})
-.bind('fileQueueError', function(event, file, errorCode, message){
-	alert('La taille du fichier dépasse la limite');
-})
-.bind('uploadError', function(e, f, c, m) {
-	//var obj = $.parseJSON(serverData);
-	//if (obj.errors) {
-	//  alert(obj.errors);
-	//}
-	console.log('>>>>>>>>>', f, c, m);
 });
 
 {%endblock%}
+
+
+
+
+
