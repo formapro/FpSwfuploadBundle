@@ -23,9 +23,6 @@ class SwfuploadFileType extends AbstractType
 
     public function buildView(FormViewInterface $view, FormInterface $form, array $options)
     {
-        $config = $form->getConfig();
-
-        $options = $config->getOptions();
         foreach($options as $name => $value) {
             if(0 === strpos($name, 'swfupload')) {
                 $view->setVar($name, $value);
@@ -33,9 +30,9 @@ class SwfuploadFileType extends AbstractType
         }
 
         $view->setVar('swfupload_file_post_name',
-            $config->getOption('swfupload_file_post_name')
-                ? $config->getOption('swfupload_file_post_name')
-                : $view->getVar('full_name')
+            empty($options['swfupload_file_post_name'])
+                ? $view->getVar('full_name')
+                : $options['swfupload_file_post_name']
         );
     }
 
