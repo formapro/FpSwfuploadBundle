@@ -15,7 +15,7 @@ class SwfuploadController extends Controller
     {
         $form = $this->createForm('swfupload_file', $data, $options);
 
-        $this->renderView('FpSwfuploadBundle:Swfupload:getForm.html.twig', array(
+        return $this->renderView('FpSwfuploadBundle:Swfupload:getForm.html.twig', array(
             'form' => $form->createView(),
         ));
     }
