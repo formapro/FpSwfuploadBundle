@@ -1,0 +1,7 @@
+services:
+    fp_swfupload.session_listener:
+        class:                                                     Fp\SwfuploadBundle\EventListener\SessionListener
+        arguments:
+            -                                                      null
+        tags:
+            -                                                      { name: kernel.event_subscriber }

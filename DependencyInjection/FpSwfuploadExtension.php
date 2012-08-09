@@ -24,5 +24,10 @@ class FpSwfuploadExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('listeners.yml');
+
+        $container->getDefinition('fp_swfupload.session_listener')
+            ->replaceArgument(0, $config['fix_session_bug_for_urls'])
+        ;
     }
 }
