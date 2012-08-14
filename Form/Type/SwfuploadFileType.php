@@ -62,6 +62,7 @@ class SwfuploadFileType extends AbstractType
             'swfupload_button_window_mode' => 'SWFUpload.WINDOW_MODE.TRANSPARENT',
             'swfupload_button_action' => 'SWFUpload.BUTTON_ACTION.SELECT_FILE',
             'swfupload_button_cursor' => 'SWFUpload.CURSOR.HAND',
+            'swfupload_post_parameters' => array(),
         ));
 
     }

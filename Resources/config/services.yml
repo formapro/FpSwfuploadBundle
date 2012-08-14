@@ -1,7 +1,13 @@
 services:
-    form.type.swfupload_file:
+    fp.swfupload.form.type.swfupload_file:
         class:                          Fp\SwfuploadBundle\Form\Type\SwfuploadFileType
         arguments:
             -                           %kernel.debug%
         tags:
             -                           { name: form.type, alias: swfupload_file }
+            
+    fp.swfupload.twig.swfupload_extension:
+        class:                          Fp\SwfuploadBundle\Twig\SwfuploadExtension
+        public:                         false
+        tags:
+            -                           { name: twig.extension }
