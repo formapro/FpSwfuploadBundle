@@ -15,9 +15,19 @@ class SessionListener implements EventSubscriberInterface
      */
     private $listenedUrls;
 
-    public function __construct(array $listenedUrls)
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    private $router;
+
+    /**
+     * @param array $listenedUrls
+     * @param \Symfony\Component\Routing\RouterInterface $router
+     */
+    public function __construct(array $listenedUrls, RouterInterface $router)
     {
         $this->listenedUrls = $listenedUrls;
+        $this->router = $router;
     }
 
     /**
@@ -34,6 +44,10 @@ class SessionListener implements EventSubscriberInterface
         $requestUrl = $request->getRequestUri();
 
         foreach($this->listenedUrls as $url) {
+            if ('/' !== $url[0]) {
+                $url = $this->router->generate($url);
+            }
+            
             if (true == preg_match('#' . $url . '#', $requestUrl)) {
                 $this->allowNonCookieSid($request);
                 break;

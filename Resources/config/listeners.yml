@@ -2,6 +2,7 @@ services:
     fp_swfupload.session_listener:
         class:                                                     Fp\SwfuploadBundle\EventListener\SessionListener
         arguments:
-            -                                                      null
+            -                                                      [] # array of urls.
+            -                                                      @router 
         tags:
             -                                                      { name: kernel.event_subscriber }
