@@ -5,12 +5,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Constraints;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormViewInterface;
+use Symfony\Component\Form\FormView;
 
 class SwfuploadFileType extends AbstractType
 {
@@ -21,7 +20,7 @@ class SwfuploadFileType extends AbstractType
         $this->debug = $debug;
     }
 
-    public function buildView(FormViewInterface $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
         foreach($options as $name => $value) {
             if(0 === strpos($name, 'swfupload')) {
