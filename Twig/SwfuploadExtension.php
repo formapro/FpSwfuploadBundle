@@ -50,7 +50,7 @@ class SwfuploadExtension extends \Twig_Extension
         //post options with null values seems not working in swfupload. remove them.
         $postParameters = array_filter($postParameters);
             
-        $swfuploadForm->setVar('swfupload_post_parameters', $postParameters);
+        $swfuploadForm->vars['swfupload_post_parameters'] = $postParameters;
         
         $renderedForm = $this->environment->render('FpSwfuploadBundle:Swfupload:getForm.html.twig', array(
             'form' => $swfuploadForm
@@ -61,7 +61,7 @@ class SwfuploadExtension extends \Twig_Extension
 
     protected function convertForm(FormView $form, &$postParameters, &$swfuploadForm)
     {
-        if ($form->hasVar('swfupload_upload_url')) {
+        if (isset($form->vars['swfupload_upload_url'])) {
             if ($swfuploadForm) {
                 throw new \LogicException('The form could have only one swfupload_file type as child');
             }
@@ -71,7 +71,7 @@ class SwfuploadExtension extends \Twig_Extension
             return;
         }
 
-        $postParameters[$form->getVar('full_name')] = $form->getVar('value');
+        $postParameters[$form->vars['full_name']] = $form->vars['value'];
         foreach ($form as $childForm) {
             $this->convertForm($childForm, $postParameters, $swfuploadForm);
         }
