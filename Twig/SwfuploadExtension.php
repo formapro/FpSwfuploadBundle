@@ -1,7 +1,7 @@
 <?php
 namespace Fp\SwfuploadBundle\Twig;
 
-use Symfony\Component\Form\FormViewInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -31,13 +31,13 @@ class SwfuploadExtension extends \Twig_Extension
     }
 
     /**
-     * @param \Symfony\Component\Form\FormViewInterface $form
+     * @param \Symfony\Component\Form\FormView $form
      * 
      * @throws \LogicException
      * 
      * @return string
      */
-    public function formSwfuploadFunction(FormViewInterface $form)
+    public function formSwfuploadFunction(FormView $form)
     {
         $postParameters = array();
         $swfuploadForm = null;
@@ -59,7 +59,7 @@ class SwfuploadExtension extends \Twig_Extension
         return new \Twig_Markup($renderedForm, 'utf-8');
     }
 
-    protected function convertForm(FormViewInterface $form, &$postParameters, &$swfuploadForm)
+    protected function convertForm(FormView $form, &$postParameters, &$swfuploadForm)
     {
         if ($form->hasVar('swfupload_upload_url')) {
             if ($swfuploadForm) {

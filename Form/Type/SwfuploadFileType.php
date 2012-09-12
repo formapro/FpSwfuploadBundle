@@ -24,15 +24,14 @@ class SwfuploadFileType extends AbstractType
     {
         foreach($options as $name => $value) {
             if(0 === strpos($name, 'swfupload')) {
-                $view->setVar($name, $value);
+                $view->vars[$name] = $value;
             }
         }
 
-        $view->setVar('swfupload_file_post_name',
-            empty($options['swfupload_file_post_name'])
-                ? $view->getVar('full_name')
-                : $options['swfupload_file_post_name']
-        );
+        $view->vars['swfupload_file_post_name'] = empty($options['swfupload_file_post_name']) ? 
+            $view->vars['full_name'] : 
+            $options['swfupload_file_post_name']
+        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

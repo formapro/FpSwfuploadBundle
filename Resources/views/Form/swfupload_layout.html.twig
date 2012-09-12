@@ -4,35 +4,35 @@
 
 {% block swfupload_file_javascript %}
 
-$("{{ form.getVar('swfupload_placeholder_container')|raw }}").swfupload({
-    upload_url:  "{{ form.getVar('swfupload_upload_url')|raw }}",
-    post_params: {{ form.getVar('swfupload_post_parameters')|json_encode|raw }},
-    file_types: "{{ form.getVar('swfupload_file_types')|raw }}",
-    file_post_name: "{{ form.getVar('swfupload_file_post_name')|raw }}",
-    file_types_description: "{{ form.getVar('swfupload_file_types_description')|raw }}",
-    file_size_limit: "{{ form.getVar('swfupload_file_size_limit')|raw }}",
-    flash_url: "{{ asset(form.getVar('swfupload_flash_url'))|raw }}",
-    button_placeholder: $('{{ form.getVar('swfupload_placeholder_container')|raw }} {{ form.getVar('swfupload_button_placeholder_selector')|raw }}')[0],
-    button_image_url: "{{asset(form.getVar('swfupload_button_image_url'))|raw }}",
+$("{{ form.vars.swfupload_placeholder_container|raw }}").swfupload({
+    upload_url:  "{{ form.vars.swfupload_upload_url|raw }}",
+    post_params: {{ form.vars.swfupload_post_parameters|json_encode|raw }},
+    file_types: "{{ form.vars.swfupload_file_types|raw }}",
+    file_post_name: "{{ form.vars.swfupload_file_post_name|raw }}",
+    file_types_description: "{{ form.vars.swfupload_file_types_description|raw }}",
+    file_size_limit: "{{ form.vars.swfupload_file_size_limit|raw }}",
+    flash_url: "{{ asset(form.vars.swfupload_flash_url)|raw }}",
+    button_placeholder: $('{{ form.vars.swfupload_placeholder_container|raw }} {{ form.vars.swfupload_button_placeholder_selector|raw }}')[0],
+    button_image_url: "{{asset(form.vars.swfupload_button_image_url)|raw }}",
 
-{%if form.getVar('swfupload_button_width')%}
-    button_width: "{{ form.getVar('swfupload_button_width') }}",
+{%if form.vars.swfupload_button_width %}
+    button_width: "{{ form.vars.swfupload_button_width }}",
 {%else%}
-    button_width: $('{{ form.getVar('swfupload_placeholder_container')|raw }} {{ form.getVar('swfupload_button_placeholder_selector')|raw }}').outerWidth(),
+    button_width: $('{{ form.vars.swfupload_placeholder_container|raw }} {{ form.vars.swfupload_button_placeholder_selector|raw }}').outerWidth(),
 {%endif%}
 
-{%if form.getVar('swfupload_button_width')%}
-    button_height: "{{ form.getVar('swfupload_button_height') }}",
+{%if form.vars.swfupload_button_width %}
+    button_height: "{{ form.vars.swfupload_button_height }}",
 {%else%}
-    button_height: $('{{ form.getVar('swfupload_placeholder_container')|raw }} {{ form.getVar('swfupload_button_placeholder_selector')|raw }}').outerHeight(),
+    button_height: $('{{ form.vars.swfupload_placeholder_container|raw }} {{ form.vars.swfupload_button_placeholder_selector|raw }}').outerHeight(),
 {%endif%}
 
-    button_text: "{{ form.getVar('swfupload_button_text') }}",
-    button_text_style: "{{ form.getVar('swfupload_button_text_style') }}",
-    flash_color: "{{ form.getVar('swfupload_flash_color')|raw }}",
-    button_window_mode: {{ form.getVar('swfupload_button_window_mode')|raw }},
-    button_action : {{ form.getVar('swfupload_button_action')|raw }},
-    button_cursor : {{ form.getVar('swfupload_button_cursor')|raw }},
+    button_text: "{{ form.vars.swfupload_button_text }}",
+    button_text_style: "{{ form.vars.swfupload_button_text_style }}",
+    flash_color: "{{ form.vars.swfupload_flash_color|raw }}",
+    button_window_mode: {{ form.vars.swfupload_button_window_mode|raw }},
+    button_action : {{ form.vars.swfupload_button_action|raw }},
+    button_cursor : {{ form.vars.swfupload_button_cursor|raw }},
 
 {%if swfupload_debug%}
     debug: true,
@@ -42,7 +42,7 @@ $("{{ form.getVar('swfupload_placeholder_container')|raw }}").swfupload({
     },
 {%else%}
     debug: false,
-    prevent_swf_caching: {{ form.getVar('swfupload_prevent_swf_caching') ? "true" : "false" }},
+    prevent_swf_caching: {{ form.vars.swfupload_prevent_swf_caching ? "true" : "false" }},
 {%endif%}
 
 });
