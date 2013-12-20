@@ -6,7 +6,7 @@ services:
         tags:
             -                           { name: form.type, alias: swfupload_file }
 
-    fp.swfupload.form.type.swfupload_file:
+    fp.swfupload.form.type.jquery_file:
         class:                          Fp\SwfuploadBundle\Form\Type\JqueryFileType
         tags:
             -                           { name: form.type, alias: jquery_file }
