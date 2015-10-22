@@ -2,7 +2,7 @@
 namespace Fp\SwfuploadBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormInterface;
@@ -34,7 +34,7 @@ class SwfuploadFileType extends AbstractType
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(array(
             'swfupload_upload_url',
@@ -59,7 +59,6 @@ class SwfuploadFileType extends AbstractType
             'swfupload_flash_color' => '#000000',
             'swfupload_button_window_mode' => 'SWFUpload.WINDOW_MODE.TRANSPARENT',
             'swfupload_button_action' => 'SWFUpload.BUTTON_ACTION.SELECT_FILE',
-            'swfupload_button_cursor' => 'SWFUpload.CURSOR.HAND',
             'swfupload_post_parameters' => array(),
         ));
 
